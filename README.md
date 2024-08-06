@@ -528,7 +528,7 @@ group.right:AddSlider('cv5', {
 })
 
 -- noclip
-group.left2:AddLabel('Noclip'):AddKeyPicker('cv6', {
+group.left2:AddToggle('Mah",{Text="Noclip",Callback=function(v)flags.noclip=v end}):AddKeyPicker('cv6', {
     Default = 'N',
     NoUI = false,
     Text = 'Noclip',
@@ -796,7 +796,7 @@ local watermarkConnection = runService.RenderStepped:Connect(function(deltaTime)
         frame.Counter = 0
     end
 
-    local watermark = ('catlova x karlol.. | %s fps'):format(fps)
+    local watermark = ('YOU HUB v5 | DOORS [BETA] | %s fps'):format(fps)
 
     lib:SetWatermark(watermark)
 end)
