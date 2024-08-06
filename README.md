@@ -408,7 +408,7 @@ group.entity:AddToggle('Snares', {
         AntiEntity.Snare = v
     end
 })
-group.entity:AddToggle("",{Text="Anti-Void Roblox",Callback(value)
+group.entity:AddToggle("",{Text="Anti-Void Roblox",Callback=function(value)
 flag.voiddisabler = value 
 end})
 group.room:AddToggle('cv131313m', {
@@ -465,7 +465,7 @@ group.env:AddToggle('Envr', {
 })
 -- speeeeedd
 group.left:AddToggle('cv1', {
-    Text = 'Speed',
+    Text = 'Enabled Speed And Bypass',
     Default = flags.speed,
     Tooltip = 'makes u fast',
     Callback = function(v)
@@ -474,7 +474,7 @@ group.left:AddToggle('cv1', {
 })
 
 group.left:AddSlider('cv2', {
-    Text = 'Studs',
+    Text = 'Studs WalkSpeed',
     Default = 30,
     Min = 0,
     Max = 50,
@@ -506,7 +506,7 @@ group.left:AddLabel('Fly - F'):AddKeyPicker('cv6', {
 })
 -- field of view
 group.right:AddToggle('cv4', {
-    Text = 'FOV',
+    Text = 'Enabled FOV',
     Default = true,
     Tooltip = 'changes fov',
     Callback = function(v)
@@ -758,7 +758,7 @@ game:GetService('ProximityPromptService').PromptTriggered:Connect(function(promp
         end)
     end
 end)
-group.prompts:AddToggle("",{Text="Noclip Prompts",Callback(value)flag.auraPrompts = value end})
+group.prompts:AddToggle("",{Text="Noclip Prompts",Callback=function(value)flag.auraPrompts = value end})
 group.prompts:AddToggle('cv14', {
     Text = 'Reach',
     Tooltip = 'Use prompts from a distance',
