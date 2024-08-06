@@ -335,7 +335,6 @@ local group = {
     esp = visual:AddLeftGroupbox'ESP',
     env = visual:AddRightGroupbox'Environment',
     left2 = general:AddRightGroupbox'Noclip',
-    right2 = exploits:AddLeftGroupbox'Bypasses',
     prompts = exploits:AddLeftGroupbox'Prompts'
 }
 -- idk
