@@ -527,7 +527,7 @@ group.right:AddSlider('cv5', {
 })
 
 -- noclip
-group.left2:AddToggle('Mah",{Text="Noclip",Callback=function(v)flags.noclip=v end}):AddKeyPicker('cv6', {
+group.left2:AddToggle('Mah',{Text="Noclip",Callback=function(v)flags.noclip=v end}):AddKeyPicker('cv6', {
     Default = 'N',
     NoUI = false,
     Text = 'Noclip',
