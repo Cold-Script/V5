@@ -431,7 +431,7 @@ group.room:AddToggle('cv131313m2233', {
 group.right:AddLabel('Third person'):AddKeyPicker('cv6mmm', {
     Default = 'V',
     NoUI = false,
-    Text = 'Third person [Beta]',
+    Text = 'Third person',
     Callback = function(v)
         flags.thirdperson = v
         mainGame.Camera.Enabled = not v
