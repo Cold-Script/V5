@@ -469,6 +469,7 @@ group.env:AddToggle('environmentFB', {
             game.Lighting.Brightness = 1
             game.Lighting.OutdoorAmbient = Color3.new(0,0,0)
             game.Lighting.GlobalShadows = true
+       end
     end
 })
 group.env:AddToggle('Envr', {
