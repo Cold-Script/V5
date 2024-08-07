@@ -88,14 +88,14 @@ lib.KeybindFrame.Visible = true
 
 local flags = {
     speed = true,
-    speedbypass = false,
+    speedbypass = true,
     noclip = false,
     ncpbypass = false,
     clipPrompts = false,
     auraPrompts = false,
     reachPrompts = false,
     fly = false,
-    esp = false,
+    esp = true,
     espRainbow = false,
     tracers = false,
     fov = false,
@@ -103,7 +103,7 @@ local flags = {
     betterEnvironment = false,
     padLock = false,
     thirdperson = false,
-    doorreach = false,
+    doorreach = true,
     voiddisabler = false
 }
 
