@@ -121,7 +121,7 @@ local OldScreechModule = remoteListener.Modules.Screech
 local OldA90Module = remoteListener.Modules.A90
 
 local values = {
-    speedV = 30,
+    speedV = 25,
     fieldOfView = 120,
     speedbypassDelay = .2
 }
@@ -447,7 +447,7 @@ group.env:AddToggle('environmentFB', {
 })
 group.env:AddToggle('Envr', {
     Text = 'Better Environment',
-    Default = false,
+    Default = true,
     Tooltip = 'Gives better lighting',
     Callback = function(v)
         flags.betterEnvironment = v
@@ -475,9 +475,9 @@ group.left:AddToggle('cv1', {
 
 group.left:AddSlider('cv2', {
     Text = 'Studs WalkSpeed',
-    Default = 30,
-    Min = 30,
-    Max = 50,
+    Default = 16,
+    Min = 16,
+    Max = 25,
     Rounding = 1,
     Compact = true,
     Callback = function(v)
@@ -688,41 +688,7 @@ roomAdded()
 
 workspace.CurrentRooms.ChildAdded:Connect(roomAdded)
 
-group.esp:AddToggle('cv8', {
-    Text = 'ESP',
-    Default = true,
-    Tooltip = 'See items through walls',
-    Callback = function(v)
-        flags.esp = v
-    end
-})
 
-
-group.esp:AddLabel('Item color'):AddColorPicker('cv9', {
-    Title = 'Item color',
-    Default = espColors[1],
-    Callback = function(v)
-        espColors[1] = v
-    end
-})
-
-group.esp:AddLabel('Asset color'):AddColorPicker('cv10', {
-    Title = 'Asset color',
-    Default = espColors[2],
-    Callback = function(v)
-        espColors[2] = v
-    end
-})
-
-
-                            
-group.esp:AddLabel('Entity color'):AddColorPicker('cv11', {
-    Title = 'Entity color',
-    Default = espColors[3],
-    Callback = function(v)
-        espColors[3] = v
-    end
-})
 -- prompts
 
 local exitKeys = {
@@ -758,7 +724,8 @@ game:GetService('ProximityPromptService').PromptTriggered:Connect(function(promp
         end)
     end
 end)
-group.prompts:AddToggle("",{Text="Noclip Prompts",Callback=function(value)flag.auraPrompts = value end})
+group.prompts:AddToggle("",{Text="Aura Prompts",Callback=function(value)flag.auraPrompts = value end})
+group.prompts:AddToggle("",{Text="Clip Prompts",Callback=function(value)flag.clipPrompts = value end})
 group.prompts:AddToggle('cv14', {
     Text = 'Reach',
     Tooltip = 'Use prompts from a distance',
