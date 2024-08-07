@@ -121,7 +121,7 @@ local OldScreechModule = remoteListener.Modules.Screech
 local OldA90Module = remoteListener.Modules.A90
 
 local values = {
-    speedV = 16,
+    speedV = 30,
     fieldOfView = 120,
     speedbypassDelay = .2
 }
