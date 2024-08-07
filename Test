@@ -108,20 +108,20 @@ local flags = {
 }
 
 local AntiEntity = {
-    Screech =  true,
-    Figure = true,
-    Seek = true,
-    A90 = true,
-    Snare = true,
-    Eyes = true,
-    Obstruction = true
+    Screech =  false,
+    Figure = false,
+    Seek = false,
+    A90 = false,
+    Snare = false,
+    Eyes = false,
+    Obstruction = false
 }
 
 local OldScreechModule = remoteListener.Modules.Screech
 local OldA90Module = remoteListener.Modules.A90
 
 local values = {
-    speedV = 22,
+    speedV = 16,
     fieldOfView = 120,
     speedbypassDelay = .2
 }
@@ -326,6 +326,8 @@ function espAttempt(object, typea, text)
         end)
     end
 end
+notify('[ YOU HUB ] : You Enable Transparency Wardrobe [ Press Right ] ')
+notify('[ YOU HUB ] : Part of Entities No Hide , Sorry ')
 local general, exploits, visual = window:AddTab'General', window:AddTab'Exploits', window:AddTab'Visuals'
 local group = {
     left = general:AddLeftGroupbox'Speed',
@@ -334,13 +336,12 @@ local group = {
     right = visual:AddLeftGroupbox'Camera',
     env = visual:AddRightGroupbox'Environment',
     left2 = general:AddRightGroupbox'Misc',
-    right2 = exploits:AddLeftGroupbox'Bypasses',
     prompts = exploits:AddLeftGroupbox'Prompts'
 }
 -- idk
 group.entity:AddToggle('Screech', {
     Text = 'Anti-Screech',
-    Default = true,
+    Default = false,
     Tooltip = 'Screech no more',
 
     Callback = function(v)
@@ -349,9 +350,9 @@ group.entity:AddToggle('Screech', {
 })
 
 group.entity:AddToggle('Eyes', {
-    Text = 'Anti-Eyes',
-    Default = true,
-    Tooltip = 'Eyes no more',
+    Text = 'Anti-Eyes & Anti-Lookman',
+    Default = false,
+    Tooltip = 'Eyes & Lookman no more',
 
     Callback = function(v)
         AntiEntity.Eyes = v
@@ -360,7 +361,7 @@ group.entity:AddToggle('Eyes', {
 
 group.entity:AddToggle('A90', {
     Text = 'Anti-A90',
-    Default = true,
+    Default = false,
     Tooltip = 'A90 no more',
 
     Callback = function(v)
@@ -370,7 +371,7 @@ group.entity:AddToggle('A90', {
 
 group.entity:AddToggle('Obstruction', {
     Text = 'Anti-Obstruction',
-    Default = true,
+    Default = false,
     Tooltip = 'Obstruction no more',
 
     Callback = function(v)
@@ -380,7 +381,7 @@ group.entity:AddToggle('Obstruction', {
 
 group.entity:AddToggle('Seek', {
     Text = 'Anti-Seek',
-    Default = true,
+    Default = false,
     Tooltip = 'Seek no more',
 
     Callback = function(v)
@@ -389,8 +390,8 @@ group.entity:AddToggle('Seek', {
 })
 
 group.entity:AddToggle('Figure', {
-    Text = 'Anti-Figure',
-    Default = true,
+    Text = 'Anti-Figure [ 50 ]',
+    Default = false,
     Tooltip = 'Figure no more',
 
     Callback = function(v)
@@ -398,20 +399,13 @@ group.entity:AddToggle('Figure', {
     end
 })
 
-group.entity:AddToggle('Snares', {
-    Text = 'Anti-Snares',
-    Default = true,
-    Tooltip = 'Snares no more',
+game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.bypassSnare then for v399,v400 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v400.Name=="Snare") then v400.Hitbox['TouchInterest']:Destroy();end end end end);end);group.entity:AddToggle("MyToggle",{Text="Anti-Snare",Default=false,Tooltip="Anti Snare",Callback=function(v132)_G.bypassSnare=v132;end});
 
-    Callback = function(v)
-        AntiEntity.Snare = v
-    end
-})
 group.entity:AddToggle("",{Text="Anti-Void Roblox",Default=true,Callback=function(value)
 flag.voiddisabler = value 
 end})
 group.entity:AddToggle("MyToggle",{Text="Anti-Dupe",Default=false,Tooltip="Anti Dupe",Callback=function(v128)if v128 then local v288;v288=game:GetService("ReplicatedStorage").GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()task.wait();for v397,v398 in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do if (v398.Name=="DoorFake") then v398.Hidden.CanTouch=false;end end repeat task.wait();until  not v288:Disconnect();end);end end})
-group.entity:AddToggle("MyToggle",{Text="Anti-Halt",Default=false,Tooltip="Anti Halt",Callback=function(v122)local v123=0;while true do if (v123==(1480 -(641 + 839))) then _G.BypassHalte=v122;if (_G.BypassHalte==true) then local v472=913 -(910 + 3) ;local v473;while true do if (v472==(0 -0)) then v473=game:GetService("ReplicatedStorage").ClientModules.EntityModules.Shade;v473.Parent=game.Workspace;break;end end elseif (_G.BypassHalte==false) then local v642=1684 -(1466 + 218) ;local v643;while true do if (v642==(0 + 0)) then v643=game.Workspace.Shade;v643.Parent=game:GetService("ReplicatedStorage").ClientModules.EntityModules;break;end end end break;end end end});
+group.entity:AddToggle("MyToggle",{Text="Anti-Halt",Default=false,Tooltip="Anti Halt",Callback=function(v122)local v123=0;while true do if (v123==(1480 -(641 + 839))) then _G.BypassHalte=v122;if (_G.BypassHalte==true) then local v472=913 -(910 + 3) ;local v473;while true do if (v472==(0 -0)) then v473=game:GetService("ReplicatedStorage").ClientModules.EntityModules.Shade;v473.Parent=game.Workspace;break;end end elseif (_G.BypassHalte==false) then local v642=1684 -(1466 + 218) ;local v643;while true do if (v642==(0 + 0)) then v643=game.Workspace.Shade;v643.Parent=game:GetSegame:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.bypassSnare then for v399,v400 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v400.Name=="Snare") then v400.Hitbox['TouchInterest']:Destroy();end end end end);end);OMG1:AddToggle("MyToggle",{Text="Không Dẫm Bẫy",Default=false,Tooltip="Anti Snare",Callback=function(v132)_G.bypassSnare=v132;end});rvice("ReplicatedStorage").ClientModules.EntityModules;break;end end end break;end end end});
 game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);group.entity:AddToggle("MyToggle",{Text="Anti-BananaPeel",Default=false,Tooltip="Anti BananaPeel!",Callback=function(v187)local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end});game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);
 group.entity:AddToggle("MyToggle",{Text="Anti-Jeff The Killer",Default=false,Tooltip="Anti Jeff!",Callback=function(v189)_G.antije=v189;end});
 local Toggle = group.entity:AddToggle("BK",{Text = "Anti-Lava",Default = false,Tooltip = "BypassKillbricks",Callback = function(Value)if Value then for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
@@ -573,6 +567,13 @@ group.left2:AddLabel("Noclip"):AddKeyPicker('cv6', {
         end
     end
 })
+game:GetService("RunService").RenderStepped:Connect(function()pcall(function()for v243,v244 in next,game.Players.LocalPlayer.Character:GetDescendants() do if (v244.IsA(v244,"BasePart") and getgenv().col) then v244.CanCollide=false;end end end);end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.SlowDownnnonononoo then if (game.Players.LocalPlayer.Character.Head.Massless==true) then local v451=1726 -(1668 + 58) ;local v452;while true do if (v451==(626 -(512 + 114))) then v452=false;game.Players.LocalPlayer.Character.Head.Massless=v452;game.Players.LocalPlayer.Character.LeftFoot.Massless=v452;game.Players.LocalPlayer.Character.LeftHand.Massless=v452;v451=2 -1 ;end if ((1 -0)==v451) then game.Players.LocalPlayer.Character.LeftLowerArm.Massless=v452;game.Players.LocalPlayer.Character.LeftLowerLeg.Massless=v452;game.Players.LocalPlayer.Character.LeftUpperArm.Massless=v452;game.Players.LocalPlayer.Character.LeftUpperLeg.Massless=v452;v451=6 -4 ;end if (v451==(2 + 1)) then game.Players.LocalPlayer.Character.RightLowerLeg.Massless=v452;game.Players.LocalPlayer.Character.RightUpperArm.Massless=v452;game.Players.LocalPlayer.Character.RightUpperLeg.Massless=v452;game.Players.LocalPlayer.Character.UpperTorso.Massless=v452;break;end if (v451==2) then game.Players.LocalPlayer.Character.LowerTorso.Massless=v452;game.Players.LocalPlayer.Character.RightFoot.Massless=v452;game.Players.LocalPlayer.Character.RightHand.Massless=v452;game.Players.LocalPlayer.Character.RightLowerArm.Massless=v452;v451=3;end end end end end);end);group.left2:AddToggle("MyToggle",{Text="No Slow Downing",Default=false,Tooltip="No Slow Down",Callback=function(v85)_G.SlowDownnnonononoo=v85;if (_G.SlowDownnnonononoo==false) then local v245=true;game.Players.LocalPlayer.Character.Head.Massless=v245;game.Players.LocalPlayer.Character.LeftFoot.Massless=v245;game.Players.LocalPlayer.Character.LeftHand.Massless=v245;game.Players.LocalPlayer.Character.LeftLowerArm.Massless=v245;game.Players.LocalPlayer.Character.LeftLowerLeg.Massless=v245;game.Players.LocalPlayer.Character.LeftUpperArm.Massless=v245;game.Players.LocalPlayer.Character.LeftUpperLeg.Massless=v245;game.Players.LocalPlayer.Character.LowerTorso.Massless=v245;game.Players.LocalPlayer.Character.RightFoot.Massless=v245;game.Players.LocalPlayer.Character.RightHand.Massless=v245;game.Players.LocalPlayer.Character.RightLowerArm.Massless=v245;game.Players.LocalPlayer.Character.RightLowerLeg.Massless=v245;game.Players.LocalPlayer.Character.RightUpperArm.Massless=v245;game.Players.LocalPlayer.Character.RightUpperLeg.Massless=v245;game.Players.LocalPlayer.Character.UpperTorso.Massless=v245;end end});
+group.left2:AddToggle("MyToggle",{Text="Collision Downing Mode",Default=false,Callback=function(GM)if GM then
+local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
+Collison.Position = Collison.Position - Vector3.new(0,13,0)
+else
+local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
+Collison.Position = Collison.Position - Vector3.new(0,-13,0)end;end})
 -- esp
 local promptsToAura = {}
 local reachedPrompts = {}
@@ -747,7 +748,6 @@ game:GetService('ProximityPromptService').PromptTriggered:Connect(function(promp
         end)
     end
 end)
-group.prompts:AddToggle("",{Text="Aura Prompts",Callback=function(value)flag.auraPrompts = value end})
 group.prompts:AddToggle("",{Text="Clip Prompts",Callback=function(value)flag.clipPrompts = value end})
 group.prompts:AddToggle('cv14', {
     Text = 'Reach',
