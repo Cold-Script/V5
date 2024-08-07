@@ -66,7 +66,7 @@ function eyesSpawned()
     return eyes ~= nil
 end
 
-local rep = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/'
+local rep = 'https://raw.githubusercontent.com/Cold-Script/LinoriaLib/patch-6/'
 
 local lib =   loadstring(game:HttpGet(rep.. 'Library.lua'))()
 local save =  loadstring(game:HttpGet(rep.. 'addons/SaveManager.lua'))()
