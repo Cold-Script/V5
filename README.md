@@ -87,7 +87,7 @@ local window = lib:CreateWindow({
 lib.KeybindFrame.Visible = true
 
 local flags = {
-    speed = false,
+    speed = true,
     speedbypass = false,
     noclip = false,
     ncpbypass = false,
