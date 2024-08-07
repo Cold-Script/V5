@@ -401,7 +401,7 @@ group.entity:AddToggle('Figure', {
 
 game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.bypassSnare then for v399,v400 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v400.Name=="Snare") then v400.Hitbox['TouchInterest']:Destroy();end end end end);end);group.entity:AddToggle("MyToggle",{Text="Anti-Snare",Default=false,Tooltip="Anti Snare",Callback=function(v132)_G.bypassSnare=v132;end});
 
-group.entity:AddToggle("",{Text="Anti-Void Roblox",Default=true,Callback=function(value)
+group.entity:AddToggle("",{Text="Anti-Void Roblox",Default=false,Callback=function(value)
 flag.voiddisabler = value 
 end})
 group.entity:AddToggle("MyToggle",{Text="Anti-Dupe",Default=false,Tooltip="Anti Dupe",Callback=function(v128)if v128 then local v288;v288=game:GetService("ReplicatedStorage").GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()task.wait();for v397,v398 in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do if (v398.Name=="DoorFake") then v398.Hidden.CanTouch=false;end end repeat task.wait();until  not v288:Disconnect();end);end end})
@@ -504,7 +504,7 @@ group.left:AddSlider('cv2', {
     Text = 'Studs WalkSpeed',
     Default = 16,
     Min = 16,
-    Max = 22,
+    Max = 25,
     Rounding = 1,
     Compact = true,
     Callback = function(v)
