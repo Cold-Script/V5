@@ -91,30 +91,30 @@ local flags = {
     speedbypass = true,
     noclip = false,
     ncpbypass = false,
-    clipPrompts = false,
-    auraPrompts = false,
-    reachPrompts = false,
+    clipPrompts = true,
+    auraPrompts = true,
+    reachPrompts = true,
     fly = false,
-    esp = true,
+    esp = false,
     espRainbow = false,
     tracers = false,
-    fov = false,
-    fb = false,
+    fov = true,
+    fb = true,
     betterEnvironment = false,
-    padLock = false,
+    padLock = true,
     thirdperson = false,
     doorreach = true,
-    voiddisabler = false
+    voiddisabler = true
 }
 
 local AntiEntity = {
-    Screech =  false,
-    Figure = false,
-    Seek = false,
-    A90 = false,
-    Snare = false,
-    Eyes = false,
-    Obstruction = false
+    Screech =  true,
+    Figure = true,
+    Seek = true,
+    A90 = true,
+    Snare = true,
+    Eyes = true,
+    Obstruction = true
 }
 
 local OldScreechModule = remoteListener.Modules.Screech
