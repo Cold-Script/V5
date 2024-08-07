@@ -66,9 +66,9 @@ function eyesSpawned()
     return eyes ~= nil
 end
 
-local rep = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/'
+local rep = 'https://raw.githubusercontent.com/Cold-Script/LinoriaLib/patch-4/'
 
-local lib =   loadstring(game:HttpGet(rep.. 'Library.lua'))()
+local lib =   loadstring(game:HttpGet(rep.. 'LinoriaLibV2.lua'))()
 local save =  loadstring(game:HttpGet(rep.. 'addons/SaveManager.lua'))()
 local theme = loadstring(game:HttpGet(rep.. 'addons/ThemeManager.lua'))()
 
@@ -714,7 +714,7 @@ end
 function workspaceAdded(entity)
     task.wait(0.01)
     if player:DistanceFromCharacter(entity.PrimaryPart.Position) <= 2000 then
-        entity.PrimaryPart.Transparency = 0
+        entity.PrimaryPart.Transparency = 1
         entity.PrimaryPart.Material = Enum.Material.SmoothPlastic
         espAttempt(entity, 'entity', entity.Name:split('Moving')[1] or entity.Name:split('Backdoor')[1] or entity.Name)
     end
