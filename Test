@@ -88,11 +88,11 @@ lib.KeybindFrame.Visible = true
 
 local flags = {
     speed = true,
-    speedbypass = true,
+    speedbypass = false,
     noclip = false,
     ncpbypass = false,
     clipPrompts = true,
-    auraPrompts = true,
+    auraPrompts = false,
     reachPrompts = true,
     fly = false,
     esp = false,
@@ -121,7 +121,7 @@ local OldScreechModule = remoteListener.Modules.Screech
 local OldA90Module = remoteListener.Modules.A90
 
 local values = {
-    speedV = 25,
+    speedV = 22,
     fieldOfView = 120,
     speedbypassDelay = .2
 }
@@ -411,6 +411,30 @@ group.entity:AddToggle('Snares', {
 group.entity:AddToggle("",{Text="Anti-Void Roblox",Default=true,Callback=function(value)
 flag.voiddisabler = value 
 end})
+group.entity:AddToggle("MyToggle",{Text="Anti-Dupe",Default=false,Tooltip="Anti Dupe",Callback=function(v128)if v128 then local v288;v288=game:GetService("ReplicatedStorage").GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()task.wait();for v397,v398 in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do if (v398.Name=="DoorFake") then v398.Hidden.CanTouch=false;end end repeat task.wait();until  not v288:Disconnect();end);end end})
+group.entity:AddToggle("MyToggle",{Text="Anti-Halt",Default=false,Tooltip="Anti Halt",Callback=function(v122)local v123=0;while true do if (v123==(1480 -(641 + 839))) then _G.BypassHalte=v122;if (_G.BypassHalte==true) then local v472=913 -(910 + 3) ;local v473;while true do if (v472==(0 -0)) then v473=game:GetService("ReplicatedStorage").ClientModules.EntityModules.Shade;v473.Parent=game.Workspace;break;end end elseif (_G.BypassHalte==false) then local v642=1684 -(1466 + 218) ;local v643;while true do if (v642==(0 + 0)) then v643=game.Workspace.Shade;v643.Parent=game:GetService("ReplicatedStorage").ClientModules.EntityModules;break;end end end break;end end end});
+game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);group.entity:AddToggle("MyToggle",{Text="Anti-BananaPeel",Default=false,Tooltip="Anti BananaPeel!",Callback=function(v187)local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end});game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);
+group.entity:AddToggle("MyToggle",{Text="Anti-Jeff The Killer",Default=false,Tooltip="Anti Jeff!",Callback=function(v189)_G.antije=v189;end});
+local Toggle = group.entity:AddToggle("BK",{Text = "Anti-Lava",Default = false,Tooltip = "BypassKillbricks",Callback = function(Value)if Value then for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
+if child then for _, v in pairs(child:GetDescendants()) do
+if v.Name == "Lava" then v.CanTouch = false end end end end ; killBricks = workspace.CurrentRooms.ChildAdded:Connect(function(child)
+task.wait(1)if child then for _, v in pairs(child:GetDescendants()) do
+if v.Name == "Lava" then v.CanTouch = false end end end end)else
+killBricks:Disconnect()
+for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
+if child then for _, v in pairs(child:GetDescendants()) do
+if v.Name == "Lava" then v.CanTouch = true end end end end end end});
+group.entity:AddToggle("BS",{Text = "Anti-Scary Wall",Default = false,Tooltip = "BypassSeek",Callback = function(Value)if Value then for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
+if child.Parts:FindFirstChild("ScaryWall") then child.Parts.ScaryWall:Destroy() end end
+SeekWall = workspace.CurrentRooms.ChildAdded:Connect(function(child)
+task.wait(1)
+if child.Parts:FindFirstChild("ScaryWall") then child.Parts.ScaryWall:Destroy() end end) else SeekWall:Disconnect() end end});
+local Toggle = group.entity:AddToggle("BD",{Text = "Anti-DrakoBloxxers",Default = false,Tooltip = "BypassDrakoBloxxers",Callback = function(Value)if Value then
+DrakoBloxxers = workspace.ChildAdded:Connect(function(child)
+task.wait(1)
+if child.Name == "Drakobloxxer" then child:Destroy() for _, v in pairs(workspace:GetChildren()) do if v.Name == "Sound" and v:IsA("Sound") then v:Destroy() end end end end) else DrakoBloxxers:Disconnect() end end})
+game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Chandelier") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Chandelier:Destroy();end end end);end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Light_Fixtures") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Light_Fixtures:Destroy();end end end);end)
+group.entity:AddToggle("Nlight",{Text = "Anti-Break Light",Default = false,Tooltip = "No Light",Callback = function(NL)_G.MSHNL = NL ;end})
 group.room:AddToggle('cv131313m', {
     Text = 'Padlock',
     Default = true,
@@ -477,7 +501,7 @@ group.left:AddSlider('cv2', {
     Text = 'Studs WalkSpeed',
     Default = 16,
     Min = 16,
-    Max = 25,
+    Max = 22,
     Rounding = 1,
     Compact = true,
     Callback = function(v)
