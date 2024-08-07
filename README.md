@@ -334,7 +334,7 @@ local group = {
     right = visual:AddRightGroupbox'Camera',
     esp = visual:AddLeftGroupbox'ESP',
     env = visual:AddRightGroupbox'Environment',
-    left2 = general:AddRightGroupbox'Noclip',
+    left2 = general:AddRightGroupbox'Misc',
     prompts = exploits:AddLeftGroupbox'Prompts'
 }
 -- idk
@@ -407,7 +407,7 @@ group.entity:AddToggle('Snares', {
         AntiEntity.Snare = v
     end
 })
-group.entity:AddToggle("",{Text="Anti-Void Roblox",Callback=function(value)
+group.entity:AddToggle("",{Text="Anti-Void Roblox",Default=true,Callback=function(value)
 flag.voiddisabler = value 
 end})
 group.room:AddToggle('cv131313m', {
@@ -475,7 +475,7 @@ group.left:AddToggle('cv1', {
 group.left:AddSlider('cv2', {
     Text = 'Studs WalkSpeed',
     Default = 30,
-    Min = 0,
+    Min = 30,
     Max = 50,
     Rounding = 1,
     Compact = true,
@@ -527,7 +527,7 @@ group.right:AddSlider('cv5', {
 })
 
 -- noclip
-group.left2:AddToggle('Mah',{Text="Noclip",Callback=function(v)flags.noclip=v end}):AddKeyPicker('cv6', {
+group.left2:AddLabel("Noclip"):AddKeyPicker('cv6', {
     Default = 'N',
     NoUI = false,
     Text = 'Noclip',
