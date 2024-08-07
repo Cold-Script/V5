@@ -331,8 +331,7 @@ local group = {
     left = general:AddLeftGroupbox'Speed',
     room = general:AddRightGroupbox'Room',
     entity = exploits:AddRightGroupbox'Anti-Entity',
-    right = visual:AddRightGroupbox'Camera',
-    esp = visual:AddLeftGroupbox'ESP',
+    right = visual:AddLeftGroupbox'Camera',
     env = visual:AddRightGroupbox'Environment',
     left2 = general:AddRightGroupbox'Misc',
     right2 = exploits:AddLeftGroupbox'Bypasses',
@@ -465,8 +464,22 @@ group.env:AddToggle('environmentFB', {
     Text = 'FullBright',
     Default = true,
     Tooltip = 'Turns the room bright',
-    Callback = function(v)
-        flags.fb = v
+    Callback = function(value)
+        if value then
+		local lighting = game.Lighting
+		lighting.Brightness = 3
+		lighting.ClockTime = 14
+		lighting.FogEnd = 100000
+		lighting.GlobalShadows = false
+		lighting.OutdoorAmbient = Color3.fromRGB(255,255,255)
+  else
+    local lighting = game.Lighting
+		lighting.Brightness = 1
+		lighting.ClockTime = 24
+		lighting.FogEnd = 200
+		lighting.GlobalShadows = true
+		lighting.OutdoorAmbient = Color3.fromRGB(0,0,0)
+	end    
     end
 })
 group.env:AddToggle('Envr', {
