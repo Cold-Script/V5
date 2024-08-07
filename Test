@@ -448,18 +448,27 @@ group.room:AddToggle('cv131313m2233', {
 group.right:AddLabel('Third person'):AddKeyPicker('cv6mmm', {
     Default = 'V',
     NoUI = false,
-    Text = 'Third person',
+    Text = 'Third Person',
     Callback = function(v)
         flags.thirdperson = v
         mainGame.Camera.Enabled = not v
     end
 })
+group.right:AddButton({Text="Press Key V",Func=function()game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+end})
 group.env:AddToggle('environmentFB', {
     Text = 'FullBright',
     Default = true,
     Tooltip = 'Turns the room bright',
     Callback = function(v)
-        flag.fb = v
+        if v then
+            game.Lighting.Brightness = 3
+            game.Lighting.OutdoorAmbient = Color3.new(1,1,1)
+            game.Lighting.GlobalShadows = false
+        else
+            game.Lighting.Brightness = 1
+            game.Lighting.OutdoorAmbient = Color3.new(0,0,0)
+            game.Lighting.GlobalShadows = true
     end
 })
 group.env:AddToggle('Envr', {
@@ -516,7 +525,7 @@ group.left:AddDropdown('cv3', {
 group.left:AddLabel('Fly - F'):AddKeyPicker('cv6', {
     Default = 'F',
     NoUI = false,
-    Text = 'Fly',
+    Text = 'Fly [ PC ]',
     Callback = function(v)
         flags.fly = v
     end
@@ -574,6 +583,8 @@ Collison.Position = Collison.Position - Vector3.new(0,13,0)
 else
 local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
 Collison.Position = Collison.Position - Vector3.new(0,-13,0)end;end})
+group.left2:AddButton({Text="Press Key N",Func=function()game:GetService("VirtualInputManager"):SendKeyEvent(true,"N",false,game)
+end})
 -- esp
 local promptsToAura = {}
 local reachedPrompts = {}
@@ -728,7 +739,7 @@ game:GetService('ProximityPromptService').PromptTriggered:Connect(function(promp
         for i, v in pairs(prompt.Parent:GetDescendants()) do
             pcall(function()
                 ogTransparency[v.Name] = v.Transparency
-                v.Transparency = .45
+                v.Transparency = 0.75
             end)
         end
         task.wait(1)
@@ -829,7 +840,7 @@ runService.RenderStepped:Connect(function(delta)
     task.spawn(function()
         if flags.speed then -- speed
             if speedMethod == 'Walkspeed' then
-                character.Humanoid.WalkSpeed = 15 + values.speedV
+                character.Humanoid.WalkSpeed = values.speedV
             elseif speedMethod == 'Boost' then
                 character.Humanoid:SetAttribute('SpeedBoostBehind', values.speedV)
             elseif speedMethod == 'CFrameWalk' then
