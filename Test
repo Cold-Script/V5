@@ -1,29 +1,4 @@
--- im doors đŸ¤“
--- cv is two cool loking letters no real meaning
--- 435345242533452325423454235gfdsdfgdsgfgsdf
 
---[[
-    todo:
-    ignore this
-]]
-
-warn'hello'
-repeat task.wait() until game:IsLoaded()
-warn'hola'
-
-local TextChatService = game:GetService('TextChatService')
-
-TextChatService.OnIncomingMessage = function(Message)
-    local Properties = Instance.new('TextChatMessageProperties')
-
-    if Message.TextSource.UserId == game.Players.LocalPlayer.UserId then
-        task.spawn(function()
-            Properties.PrefixText = "<font color='rgb(255, 0, 144)'>[karlol!!] </font>" .. Message.PrefixText
-        end)
-    end
-
-    return Properties
-end
 
 local notificationSound = Instance.new'Sound'
 notificationSound.SoundId = 'rbxassetid://6897623656'
