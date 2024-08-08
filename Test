@@ -25,7 +25,6 @@ local player = players.LocalPlayer
 local playerGUI = player.PlayerGui
 local mainGUI = playerGUI.MainUI
 local mainGame = mainGUI.Initiator.Main_Game
-local gameIndex = getrawmetatable(game).__index
 local hints = playerGUI.PermUI.Hints
 local remoteListener = mainGame:FindFirstChild'RemoteListener'
 
@@ -45,31 +44,25 @@ local lib =   loadstring(game:HttpGet(rep.. 'Library.lua'))()
 local save =  loadstring(game:HttpGet(rep.. 'addons/SaveManager.lua'))()
 local theme = loadstring(game:HttpGet(rep.. 'addons/ThemeManager.lua'))()
 local LiveCaption = loadstring(game:HttpGet('https://pastebin.com/raw/VJs4yXRm'))()
+LiveCaption.Caption({
+    Text = "Helper : GV , Owner : rechedmcvn";
+    Timer = 5;
+    Sound = warningSound:Play()
+})
 
 local Options = getgenv().Options
 
 local window = lib:CreateWindow({
     Title = 'YOU HUB v5 | DOORS [BETA] | ' .. player.Name,
     Center = true,
-    AutoShow = true,
+    AutoShow = false,
     TabPadding = 8,
     MenuFadeTime = 0.2
 })
 
 -- settings up stuff
 
-LiveCaption.Caption({
-    Text = "Helper : GV , Owner : rechedmcvn";
-    Timer = 5;
-     Sound = warningSound:Play()
-})
-wait(6)
-LiveCaption.Caption({
-    Text = "Loading...";
-    Timer = 3;
-     Sound = warningSound:Play()
-})
-wait(4)
+
 local flags = {
     speed = true,
     speedbypass = false,
