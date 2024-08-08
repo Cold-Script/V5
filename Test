@@ -44,6 +44,7 @@ local rep = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/'
 local lib =   loadstring(game:HttpGet(rep.. 'Library.lua'))()
 local save =  loadstring(game:HttpGet(rep.. 'addons/SaveManager.lua'))()
 local theme = loadstring(game:HttpGet(rep.. 'addons/ThemeManager.lua'))()
+local LiveCaption = loadstring(game:HttpGet('https://pastebin.com/raw/VJs4yXRm'))()
 
 local Options = getgenv().Options
 
@@ -57,8 +58,18 @@ local window = lib:CreateWindow({
 
 -- settings up stuff
 
-
-
+LiveCaption.Caption({
+    Text = "Helper : GV , Owner : rechedmcvn";
+    Timer = 5;
+     Sound = warningSound:Play()
+})
+wait(6)
+LiveCaption.Caption({
+    Text = "Loading...";
+    Timer = 3;
+     Sound = warningSound:Play()
+})
+wait(4)
 local flags = {
     speed = true,
     speedbypass = false,
@@ -938,10 +949,9 @@ lib.ToggleKeybind = Options.MenuKeybind
 
 local configuration = window:AddTab'Configuration'
 do
+local configuration = configuration:AddLeftGroupbox("Menu")
 configuration:AddButton({Text="Unload Library",DoubleClick=true,Func=function()
 Library:Unload()
-wait(1)
-lib:Unload()
 end})
 configuration:AddToggle("yre",{Text="Keyboard",Default=true,Callback=function(value)
 lib.KeybindFrame.Visible = value
