@@ -427,6 +427,41 @@ task.wait(1)
 if child.Name == "Drakobloxxer" then child:Destroy() for _, v in pairs(workspace:GetChildren()) do if v.Name == "Sound" and v:IsA("Sound") then v:Destroy() end end end end) else DrakoBloxxers:Disconnect() end end})
 game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Chandelier") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Chandelier:Destroy();end end end);end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Light_Fixtures") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Light_Fixtures:Destroy();end end end);end)
 group.entity:AddToggle("Nlight",{Text = "Anti-Break Light",Default = false,Tooltip = "No Light",Callback = function(NL)_G.MSHNL = NL ;end})
+group.entity:AddToggle("Lolay",{Text="Anti-Jumpcare Glitch",Callback=function(value)
+if value then
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="Glitch" then
+v:Destroy()
+    end
+ end
+else
+v:Disconnect()
+   end
+end})
+group.entity:AddToggle("Lolay",{Text="Anti-Jumpcare Void",Callback=function(value)
+if value then
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="Void" then
+v:Destroy()
+    end
+ end
+else
+v:Disconnect()
+   end
+end})
+group.entity:AddToggle("Lolay",{Text="Anti-Jumpcare Timothy",Callback=function(value)
+if value then
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="Timothy" then
+v:Destroy()
+elseif v.Name=="Spider" then
+v:Destroy()
+    end
+ end
+else
+v:Disconnect()
+   end
+end})
 group.room:AddToggle('cv131313m', {
     Text = 'Padlock',
     Default = true,
@@ -473,7 +508,7 @@ group.env:AddToggle('environmentFB', {
 })
 group.env:AddToggle('Envr', {
     Text = 'Better Environment',
-    Default = true,
+    Default = false,
     Tooltip = 'Gives better lighting',
     Callback = function(v)
         flags.betterEnvironment = v
@@ -489,6 +524,18 @@ group.env:AddToggle('Envr', {
         end
     end
 })
+group.env:AddToggle('environmentFB', {
+    Text = 'No Fog',
+    Default = false,
+    Tooltip = 'Turns the room nofog',
+    Callback = function(v)
+        if v then
+            game.Lighting.FogEnd = 9e9
+        else
+            game.Lighting.FogEnd = 200
+       end
+    end
+})
 -- speeeeedd
 group.left:AddToggle('cv1', {
     Text = 'Enabled Speed And Bypass',
@@ -501,7 +548,7 @@ group.left:AddToggle('cv1', {
 
 group.left:AddSlider('cv2', {
     Text = 'Studs WalkSpeed',
-    Default = 16,
+    Default = 25,
     Min = 16,
     Max = 25,
     Rounding = 1,
@@ -512,9 +559,9 @@ group.left:AddSlider('cv2', {
 })
 
 group.left:AddDropdown('cv3', {
-    Values = {'Boost', 'Walkspeed', 'CFrameWalk'},
+    Values = {'Walkspeed', 'Boost', 'CFrameWalk'},
     Text = 'Speed method',
-    Default = 'Boost',
+    Default = 'Walkspeed',
     Multi = false,
     Tooltip = 'what method to use for speed',
     Callback = function(v)
