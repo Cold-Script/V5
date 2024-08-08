@@ -44,11 +44,6 @@ local lib =   loadstring(game:HttpGet(rep.. 'Library.lua'))()
 local save =  loadstring(game:HttpGet(rep.. 'addons/SaveManager.lua'))()
 local theme = loadstring(game:HttpGet(rep.. 'addons/ThemeManager.lua'))()
 local LiveCaption = loadstring(game:HttpGet('https://raw.githubusercontent.com/Cold-Script/Love/main/Live'))()
-LiveCaption.Caption({
-    Text = "Helper : GV , Owner : rechedmcvn";
-    Timer = 5;
-    Sound = warningSound:Play()
-})
 
 local Options = getgenv().Options
 
@@ -959,3 +954,8 @@ end})
     theme:ApplyToTab(configuration)
     save:LoadAutoloadConfig()
 end
+LiveCaption.Caption({
+    Text = "Helper : GV , Owner : rechedmcvn";
+    Timer = 5;
+    Sound = warningSound:Play()
+})
