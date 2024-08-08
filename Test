@@ -937,11 +937,11 @@ lib.ToggleKeybind = Options.MenuKeybind
 
 local configuration = window:AddTab'Configuration'
 do
-local configuration = configuration:AddLeftGroupbox("Menu")
-configuration:AddButton({Text="Unload Library",DoubleClick=true,Func=function()
+local configuratio = configuration:AddLeftGroupbox("Menu")
+configuratio:AddButton({Text="Unload Library",DoubleClick=true,Func=function()
 Library:Unload()
 end})
-configuration:AddToggle("yre",{Text="Keyboard",Default=true,Callback=function(value)
+configuratio:AddToggle("yre",{Text="Keyboard",Default=false,Callback=function(value)
 lib.KeybindFrame.Visible = value
 end})
     theme:SetLibrary(lib)
@@ -954,8 +954,3 @@ end})
     theme:ApplyToTab(configuration)
     save:LoadAutoloadConfig()
 end
-LiveCaption.Caption({
-    Text = "Helper : GV , Owner : rechedmcvn";
-    Timer = 5;
-    Sound = warningSound:Play()
-})
