@@ -32,4 +32,5 @@ local window = lib:CreateWindow({
     MenuFadeTime = 0.2
 })
 tab = window:AddTab("Main")
-misc = tab:AddLeftGroupbox("Misc")
+misc = tab:AddLeftGroupbox("Players")
+misc:AddSlider("",{Text="
