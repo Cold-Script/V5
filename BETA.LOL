@@ -17,14 +17,15 @@ local runService = game:GetService'RunService'
 local UserInputService = game:GetService('UserInputService')
 local lighting = game.Lighting
 local gameData = replicatedStorage.GameData
-local remoteFolder = replicatedStorage.RemotesFolder
 local latestRoom = gameData.LatestRoom
 local floor = gameData.Floor
 
 local player = players.LocalPlayer
 local playerGUI = player.PlayerGui
 local mainGUI = playerGUI.MainUI
+local mainGame = mainGUI.Initiator.Main_Game
 local hints = playerGUI.PermUI.Hints
+local remoteListener = mainGame:FindFirstChild'RemoteListener'
 
 local character
 character = player.Character
