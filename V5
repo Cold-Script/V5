@@ -32,5 +32,179 @@ local window = lib:CreateWindow({
     MenuFadeTime = 0.2
 })
 tab = window:AddTab("Main")
+group.room = tab:AddRightGroupbox("Rooms")
 misc = tab:AddLeftGroupbox("Players")
-misc:AddSlider("",{Text="
+group.room:AddToggle('cv131313m', {
+    Text = 'Padlock [ 50 ]',
+    Default = true,
+    Tooltip = 'Automatically does padlock code',
+    Callback = function(v)
+        flags.padLock = v
+    end
+})
+
+group.room:AddToggle('cv131313m2233', {
+    Text = 'Door reach',
+    Default = true,
+    Tooltip = 'Automatically opens door for you',
+    Callback = function(v)
+        flags.doorreach = v
+    end
+})
+group.right2 = tab:AddRightGroupbox("Camera")
+group.right2:AddLabel('Third person'):AddKeyPicker('cv6mmm', {
+    Default = 'V',
+    NoUI = false,
+    Text = 'Third Person',
+    Callback = function(v)
+        flags.thirdperson = v
+        mainGame.Camera.Enabled = not v
+    end
+})
+group.right2:AddButton({Text="Press Key V",Func=function()game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+end})
+
+group.right2:AddToggle('environmentFB', {
+    Text = 'FullBright',
+    Default = false,
+    Tooltip = 'Turns the room bright',
+    Callback = function(v)
+        if v then
+            game.Lighting.Brightness = 3
+            game.Lighting.OutdoorAmbient = Color3.new(1,1,1)
+            game.Lighting.GlobalShadows = false
+        else
+            game.Lighting.Brightness = 1
+            game.Lighting.OutdoorAmbient = Color3.new(0,0,0)
+            game.Lighting.GlobalShadows = true
+       end
+    end
+})
+group.right2:AddToggle('Envr', {
+    Text = 'Better Environment',
+    Default = false,
+    Tooltip = 'Gives better lighting',
+    Callback = function(v)
+        flags.betterEnvironment = v
+        if flags.betterEnvironment then
+            task.spawn(function()
+                repeat
+                    lighting.OutdoorAmbient = Color3.fromRGB()
+                    task.wait()
+                until not flags.betterEnvironment
+            end)
+        else
+            lighting.Ambient = workspace.CurrentRooms[player:GetAttribute("CurrentRoom")]:GetAttribute("Ambient")
+        end
+    end
+})
+group.right2:AddToggle('environmentFB', {
+    Text = 'No Fog',
+    Default = false,
+    Tooltip = 'Turns the room nofog',
+    Callback = function(v)
+        if v then
+            game.Lighting.FogEnd = 9e9
+        else
+            game.Lighting.FogEnd = 200
+       end
+    end
+})
+-- speeeeedd
+misc:AddToggle('cv1', {
+    Text = 'Enabled Speed',
+    Default = flags.speed,
+    Tooltip = 'makes u fast',
+    Callback = function(v)
+        flags.speed = v
+    end
+})
+
+group.left:AddSlider('cv2', {
+    Text = 'Studs WalkSpeed',
+    Default = 25,
+    Min = 16,
+    Max = 25,
+    Rounding = 1,
+    Compact = true,
+    Callback = function(v)
+        values.speedV = v
+    end
+})
+
+group.left:AddDropdown('cv3', {
+    Values = {'Walkspeed', 'Boost', 'CFrameWalk'},
+    Text = 'Speed method',
+    Default = 'Walkspeed',
+    Multi = false,
+    Tooltip = 'what method to use for speed',
+    Callback = function(v)
+        speedMethod = v
+    end
+})
+
+group.left:AddLabel('Fly - F'):AddKeyPicker('cv6', {
+    Default = 'F',
+    NoUI = false,
+    Text = 'Fly [ PC ]',
+    Callback = function(v)
+        flags.fly = v
+    end
+})
+-- field of view
+group.right2:AddToggle('cv4', {
+    Text = 'Enabled FOV',
+    Default = true,
+    Tooltip = 'changes fov',
+    Callback = function(v)
+        flags.fov = v
+    end
+})
+
+group.right2:AddSlider('cv5', {
+    Text = 'FOV',
+    Default = 120,
+    Min = 70,
+    Max = 120,
+    Rounding = 1,
+    Compact = true,
+    Callback = function(v)
+        warn(v)
+        values.fieldOfView = v
+    end
+})
+
+-- noclip
+misc:AddLabel("Noclip"):AddKeyPicker('cv6', {
+    Default = 'N',
+    NoUI = false,
+    Text = 'Noclip',
+    Callback = function(v)
+        flags.noclip = v
+        if flags.noclip then
+            for i, Part in character:GetDescendants() do
+                if Part:IsA'BasePart' then
+                    local CC = Part.CanCollide
+                    task.spawn(function()
+                        repeat
+                            Part.CanCollide = false
+                            task.wait()
+                        until not flags.noclip
+                        Part.CanCollide = CC
+                    end)
+                end
+            end
+        end
+    end
+})
+game:GetService("RunService").RenderStepped:Connect(function()pcall(function()for v243,v244 in next,game.Players.LocalPlayer.Character:GetDescendants() do if (v244.IsA(v244,"BasePart") and getgenv().col) then v244.CanCollide=false;end end end);end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.SlowDownnnonononoo then if (game.Players.LocalPlayer.Character.Head.Massless==true) then local v451=1726 -(1668 + 58) ;local v452;while true do if (v451==(626 -(512 + 114))) then v452=false;game.Players.LocalPlayer.Character.Head.Massless=v452;game.Players.LocalPlayer.Character.LeftFoot.Massless=v452;game.Players.LocalPlayer.Character.LeftHand.Massless=v452;v451=2 -1 ;end if ((1 -0)==v451) then game.Players.LocalPlayer.Character.LeftLowerArm.Massless=v452;game.Players.LocalPlayer.Character.LeftLowerLeg.Massless=v452;game.Players.LocalPlayer.Character.LeftUpperArm.Massless=v452;game.Players.LocalPlayer.Character.LeftUpperLeg.Massless=v452;v451=6 -4 ;end if (v451==(2 + 1)) then game.Players.LocalPlayer.Character.RightLowerLeg.Massless=v452;game.Players.LocalPlayer.Character.RightUpperArm.Massless=v452;game.Players.LocalPlayer.Character.RightUpperLeg.Massless=v452;game.Players.LocalPlayer.Character.UpperTorso.Massless=v452;break;end if (v451==2) then game.Players.LocalPlayer.Character.LowerTorso.Massless=v452;game.Players.LocalPlayer.Character.RightFoot.Massless=v452;game.Players.LocalPlayer.Character.RightHand.Massless=v452;game.Players.LocalPlayer.Character.RightLowerArm.Massless=v452;v451=3;end end end end end);end);group.left2:AddToggle("MyToggle",{Text="No Slow Downing",Default=false,Tooltip="No Slow Down",Callback=function(v85)_G.SlowDownnnonononoo=v85;if (_G.SlowDownnnonononoo==false) then local v245=true;game.Players.LocalPlayer.Character.Head.Massless=v245;game.Players.LocalPlayer.Character.LeftFoot.Massless=v245;game.Players.LocalPlayer.Character.LeftHand.Massless=v245;game.Players.LocalPlayer.Character.LeftLowerArm.Massless=v245;game.Players.LocalPlayer.Character.LeftLowerLeg.Massless=v245;game.Players.LocalPlayer.Character.LeftUpperArm.Massless=v245;game.Players.LocalPlayer.Character.LeftUpperLeg.Massless=v245;game.Players.LocalPlayer.Character.LowerTorso.Massless=v245;game.Players.LocalPlayer.Character.RightFoot.Massless=v245;game.Players.LocalPlayer.Character.RightHand.Massless=v245;game.Players.LocalPlayer.Character.RightLowerArm.Massless=v245;game.Players.LocalPlayer.Character.RightLowerLeg.Massless=v245;game.Players.LocalPlayer.Character.RightUpperArm.Massless=v245;game.Players.LocalPlayer.Character.RightUpperLeg.Massless=v245;game.Players.LocalPlayer.Character.UpperTorso.Massless=v245;end end});
+misc:AddToggle("MyToggle",{Text="Collision Downing Mode",Default=false,Callback=function(GM)if GM then
+local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
+Collison.Position = Collison.Position - Vector3.new(0,10,0)
+else
+local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
+Collison.Position = Collison.Position - Vector3.new(0,-10,0)end;end})
+misc:AddButton({Text="Press Key N",Func=function()game:GetService("VirtualInputManager"):SendKeyEvent(true,"N",false,game)
+end})
+misc:AddButton({Text="Reset Character",DoubleClick=true,Func=function()game.Players.LocalPlayer.Character.Humanoid.Health=0
+end})
