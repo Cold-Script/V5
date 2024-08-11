@@ -24,9 +24,7 @@ local floor = gameData.Floor
 local player = players.LocalPlayer
 local playerGUI = player.PlayerGui
 local mainGUI = playerGUI.MainUI
-local mainGame = mainGUI.Initiator.Main_Game
 local hints = playerGUI.PermUI.Hints
-local remoteListener = mainGame:FindFirstChild'RemoteListener'
 
 local character
 character = player.Character
@@ -48,9 +46,9 @@ local LiveCaption = loadstring(game:HttpGet('https://raw.githubusercontent.com/C
 local Options = getgenv().Options
 
 local window = lib:CreateWindow({
-    Title = 'YOU HUB v5 | DOORS [BETA] | ' .. player.Name,
+    Title = 'YOU HUB v5 | DOORS 👁️ [BETA] | ' .. player.Name,
     Center = true,
-    AutoShow = false,
+    AutoShow = true,
     TabPadding = 8,
     MenuFadeTime = 0.2
 })
@@ -351,7 +349,7 @@ group.entity:AddToggle('Obstruction', {
 })
 
 group.entity:AddToggle('Seek', {
-    Text = 'Anti-Seek',
+    Text = 'Anti-Seek Trigger',
     Default = false,
     Tooltip = 'Seek no more',
 
@@ -369,6 +367,8 @@ group.entity:AddToggle('Figure', {
         AntiEntity.Figure = v
     end
 })
+game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);group.entity:AddToggle("MyToggle",{Text="Anti-BananaPeel",Default=false,Tooltip="Anti BananaPeel!",Callback=function(v187)local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end});game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);
+group.entity:AddToggle("MyToggle",{Text="Anti-Jeff The Killer",Default=false,Tooltip="Anti Jeff!",Callback=function(v189)_G.antije=v189;end});
 
 game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.bypassSnare then for v399,v400 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v400.Name=="Snare") then v400.Hitbox['TouchInterest']:Destroy();end end end end);end);group.entity:AddToggle("MyToggle",{Text="Anti-Snare",Default=false,Tooltip="Anti Snare",Callback=function(v132)_G.bypassSnare=v132;end});
 
@@ -423,8 +423,7 @@ group.right:AddLabel('Third person'):AddKeyPicker('cv6mmm', {
         mainGame.Camera.Enabled = not v
     end
 })
-group.right:AddButton({Text="Press Key V",Func=function()game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
-end})
+
 group.env:AddToggle('environmentFB', {
     Text = 'FullBright',
     Default = false,
@@ -534,7 +533,8 @@ group.right:AddSlider('cv5', {
         values.fieldOfView = v
     end
 })
-
+group.right:AddButton({Text="Press Key V",Func=function()game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+end})
 -- noclip
 group.left2:AddLabel("Noclip"):AddKeyPicker('cv6', {
     Default = 'N',
@@ -781,7 +781,7 @@ local watermarkConnection = runService.RenderStepped:Connect(function(deltaTime)
         frame.Counter = 0
     end
 
-    local watermark = ('YOU HUB v5 | DOORS [BETA] | %s fps'):format(fps)
+    local watermark = ('YOU HUB v5 | DOORS 👁️ [BETA] | %s fps'):format(fps)
 
     lib:SetWatermark(watermark)
 end)
