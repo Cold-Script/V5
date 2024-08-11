@@ -16,6 +16,27 @@ local mainGame = mainGUI.Initiator.Main_Game
 local hints = playerGUI.PermUI.Hints
 local remoteListener = mainGame:FindFirstChild'RemoteListener'
 
+local flags = {
+    speed = true,
+    speedbypass = false,
+    noclip = false,
+    ncpbypass = false,
+    clipPrompts = true,
+    auraPrompts = false,
+    reachPrompts = true,
+    fly = false,
+    esp = false,
+    espRainbow = false,
+    tracers = false,
+    fov = true,
+    fb = false,
+    betterEnvironment = false,
+    padLock = true,
+    thirdperson = false,
+    doorreach = true,
+    voiddisabler = true
+}
+
 local rep = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/'
 
 local lib =   loadstring(game:HttpGet(rep.. 'Library.lua'))()
@@ -208,3 +229,182 @@ misc:AddButton({Text="Press Key N",Func=function()game:GetService("VirtualInputM
 end})
 misc:AddButton({Text="Reset Character",DoubleClick=true,Func=function()game.Players.LocalPlayer.Character.Humanoid.Health=0
 end})
+Tab2 = window:AddTab("Prompts")
+group.prompts = Tab2:AddLeftGroupbox("Prompts")
+group.prompts:AddToggle("",{Text="Clip Prompts",Callback=function(value)flag.clipPrompts = value end})
+group.prompts:AddToggle('cv14', {
+    Text = 'Reach',
+    Tooltip = 'Use prompts from a distance',
+    Default = true,
+    Callback = function(v)
+        flags.reachPrompts = v
+    end
+})
+
+group.prompts:AddSlider('cv15', {
+    Text = 'Distance',
+    Default = 7,
+    Min = 7,
+    Max = 30,
+    Rounding = 1,
+    Compact = true,
+    Callback = function(v)
+        reach = v
+    end
+})
+
+-- connections
+local frame = {
+    Counter = 0,
+    Timer = tick()
+}
+local fps = 0
+
+local watermarkConnection = runService.RenderStepped:Connect(function(deltaTime)
+    frame.Counter += 1
+    
+    if (tick() - frame.Timer) >= 1 then
+        frame.Timer = tick()
+        fps = frame.Counter
+        frame.Counter = 0
+    end
+
+    local watermark = ('YOU HUB v5 | DOORS [BETA] | %s fps'):format(fps)
+
+    lib:SetWatermark(watermark)
+end)
+
+-- mainscript
+local speedbypassCVM = tick()
+local flyvelo = Instance.new('BodyVelocity'); do
+    flyvelo.Velocity = Vector3.zero
+    flyvelo.MaxForce = Vector3.one * 9e9
+end
+
+local NoAccel = PhysicalProperties.new(100, 2, 0, 100, 0)
+character.Collision.CollisionCrouch.Massless = true
+character.Collision.CollisionCrouch.CanCollide = false
+
+function OnCharacterAdded(Character)
+    Character.ChildAdded:Connect(function(Object)
+        task.wait(.5)
+        if Object:IsA'Tool' then
+            if Object.Name == 'LibraryHintPaper' and flags.padLock then
+                notify(string.format('The current code is: %s', getPadlockCode(Object)))
+                
+                if tonumber(getPadlockCode(Object)) then
+                    remoteFolder.PL:FireServer(tostring(getPadlockCode(Object)))
+                end
+            end
+        end
+    end)
+end
+
+player.CharacterAdded:Connect(OnCharacterAdded)
+OnCharacterAdded(character)
+
+runService.RenderStepped:Connect(function(delta)
+    game:GetService('ProximityPromptService').MaxPromptsVisible = 50
+    character = player.Character
+    character.HumanoidRootPart.CustomPhysicalProperties = NoAccel
+    character.Collision.CustomPhysicalProperties = NoAccel
+    character.Collision.CollisionCrouch.CustomPhysicalProperties = NoAccel
+    task.spawn(function()
+        if flags.speed then -- speed
+            if speedMethod == 'Walkspeed' then
+                character.Humanoid.WalkSpeed = values.speedV
+            elseif speedMethod == 'Boost' then
+                character.Humanoid:SetAttribute('SpeedBoostBehind', values.speedV)
+            elseif speedMethod == 'CFrameWalk' then
+                character:TranslateBy(character.Humanoid.MoveDirection * (values.speedV / 1.23) / 100)
+            end
+            if (tick() - speedbypassCVM) >= values.speedbypassDelay then
+                character.Collision.Massless = not character.Collision.Massless
+                speedbypassCVM = tick()
+            end
+        else
+            speedbypassCVM = tick()
+        end
+    end)
+    
+    task.spawn(function()
+        if flags.fb then
+            game.Lighting.Brightness = 3
+            game.Lighting.OutdoorAmbient = Color3.new(1,1,1)
+        else
+
+            game.Lighting.Brightness = 1
+            game.Lighting.OutdoorAmbient = Color3.new(0,0,0)
+        end
+    end)
+
+    task.spawn(function()
+        if flags.voiddisabler then
+            workspace.FallenPartsDestroyHeight = 0 / 0 -- otherwise known as nan! (a number below -math.huge)
+        else
+            workspace.FallenPartsDestroyHeight = OldVoid
+        end
+    end)
+
+    task.spawn(function()
+        if flags.thirdperson then
+            camera.CameraType = Enum.CameraType.Custom
+            character.HumanoidRootPart.CFrame = CFrame.new(character.HumanoidRootPart.Position) * CFrame.fromOrientation(0, ({camera.CFrame:ToOrientation()})[2], 0)
+            character.Head.Transparency = 0
+            for i, v in character:GetChildren() do
+                if v:IsA'Accessory' and v.Name:lower():match('accessory') then
+                    for name, src in v:GetChildren() do
+                        pcall(function()
+                            src.Transparency = 0
+                        end)
+                    end
+                end
+            end
+        else
+            camera.CameraType = Enum.CameraType.Scriptable
+            character.Head.Transparency = 1
+            for i, v in character:GetChildren() do
+                if v:IsA'Accessory' and v.Name:lower():match('accessory') then
+                    for name, src in v:GetChildren() do
+                        pcall(function()
+                            src.Transparency = 1
+                        end)
+                    end
+                end
+            end
+        end
+    end)
+
+    task.spawn(function()
+        flyvelo.Parent = flags.fly and character.HumanoidRootPart or nil
+        flyvelo.Name = math.random(1000, 9999)
+        if flags.fly then
+            local add = Vector3.zero
+
+            if UserInputService:IsKeyDown(Enum.KeyCode.W) then add += camera.CFrame.LookVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.S) then add -= camera.CFrame.LookVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.D) then add += camera.CFrame.RightVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.A) then add -= camera.CFrame.RightVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.Space) then add += camera.CFrame.UpVector end
+            if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then add -= camera.CFrame.UpVector end
+
+            flyvelo.Velocity = add * (values.speedV * 20) / 300 * 22
+        end
+    end)
+
+    if eyesSpawned() then
+        if AntiEntity.Eyes then
+            if eyesSpawned() then
+                remoteFolder.MotorReplication:FireServer(0, -90, 0, false)
+            end
+        end
+    end
+
+    task.spawn(function()
+        if flags.fov then
+            camera.FieldOfView = values.fieldOfView
+        else
+            camera.FieldOfView = 70
+        end
+    end)
+end)
