@@ -87,12 +87,12 @@ local AntiEntity = {
     Eyes = false,
     Obstruction = false
 }
-
+local v16={espdoors=false,espkeys=false,espitems=false,espbooks=false,esprush=false,espchest=false,esplocker=false,esphumans=false,espgold=false,goldespvalue=1061 -(810 + 251) ,hintrush=false,hintrushhee=false,light=false,instapp=false,noseek=false,nogates=false,nopuzzle=false,noa90=false,noskeledoors=false,noseekarmsfire=false,noscreech=false,nodupe=false,getcode=false,getcodet=false,roomsnolock=false,draweraura=false,autorooms=false,itemsaura=false,autopulllever=false,bookcollecter=false,breakercollecter=false};local v17={table.unpack(v16)};local v18={doors={},keys={},items={},books={},entity={},chests={},lockers={},people={},gold={}};
 local OldScreechModule = remoteListener.Modules.Screech
 local OldA90Module = remoteListener.Modules.A90
 
 local values = {
-    speedV = 16,
+    speedV = 25,
     fieldOfView = 120,
     speedbypassDelay = .2
 }
@@ -376,6 +376,7 @@ game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if
 group.entity:AddToggle("",{Text="Anti-Void Roblox",Default=false,Callback=function(value)
 flag.voiddisabler = value 
 end})
+group.entity:AddToggle("MyToggle",{Text="Anti-Dupe [ No Locked ]",Default=false,Tooltip="Anti Dupe No locked",Callback=function(v128)v16.nodupe=v128;if v128 then local v288;v288=game:GetService("ReplicatedStorage").GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()task.wait();for v397,v398 in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do if (v398.Name=="DoorFake") then v398.Hidden.CanTouch=false;end end repeat task.wait();until  not v16.nodupe v288:Disconnect();end);end end});
 group.entity:AddToggle("MyToggle",{Text="Anti-Halt",Default=false,Tooltip="Anti Halt",Callback=function(v122)local v123=0;while true do if (v123==(1480 -(641 + 839))) then _G.BypassHalte=v122;if (_G.BypassHalte==true) then local v472=913 -(910 + 3) ;local v473;while true do if (v472==(0 -0)) then v473=game:GetService("ReplicatedStorage").ClientModules.EntityModules.Shade;v473.Parent=game.Workspace;break;end end elseif (_G.BypassHalte==false) then local v642=1684 -(1466 + 218) ;local v643;while true do if (v642==(0 + 0)) then v643=game.Workspace.Shade;v643.Parent=game:GetService("ReplicatedStorage").ClientModules.EntityModules;break;end end end break;end end end});
 local Toggle = group.entity:AddToggle("BK",{Text = "Anti-Lava",Default = false,Tooltip = "BypassKillbricks",Callback = function(Value)if Value then for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
 if child then for _, v in pairs(child:GetDescendants()) do
@@ -450,7 +451,7 @@ group.env:AddToggle('Envr', {
         if flags.betterEnvironment then
             task.spawn(function()
                 repeat
-                    lighting.OutdoorAmbient = Color3.fromRGB()
+                    lighting.OutdoorAmbient = Color3.fromRGB(255,255,255)
                     task.wait()
                 until not flags.betterEnvironment
             end)
@@ -766,9 +767,7 @@ group.prompts:AddSlider('cv15', {
         reach = v
     end
 })
-group.prompts:AddButton({Text="Aura Prompts",DoubleClick=true,Func=function()
-flags.auraPrompts = true
-end})
+
 -- connections
 local frame = {
     Counter = 0,
@@ -828,9 +827,9 @@ runService.RenderStepped:Connect(function(delta)
     task.spawn(function()
         if flags.speed then -- speed
             if speedMethod == 'Walkspeed' then
-                character.Humanoid:SetAttribute('SpeedBoostBehind', values.speedV)
-            elseif speedMethod == 'Boost' then
                 character.Humanoid.WalkSpeed = values.speedV
+            elseif speedMethod == 'Boost' then
+                character.Humanoid:SetAttribute('SpeedBoostBehind', values.speedV)
             elseif speedMethod == 'CFrameWalk' then
                 character:TranslateBy(character.Humanoid.MoveDirection * (values.speedV / 1.23) / 100)
             end
