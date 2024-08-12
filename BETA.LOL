@@ -473,7 +473,7 @@ group.env:AddToggle('environmentFB', {
 })
 -- speeeeedd
 group.left:AddToggle('cv1', {
-    Text = 'Enabled Speed And Bypass',
+    Text = 'Enabled Speed',
     Default = flags.speed,
     Tooltip = 'makes u fast',
     Callback = function(v)
@@ -766,7 +766,7 @@ group.prompts:AddSlider('cv15', {
         reach = v
     end
 })
-group.prompts:AddButton("",{Text="Aura Prompts",DoubleClick=true,Func=function()
+group.prompts:AddButton({Text="Aura Prompts",DoubleClick=true,Func=function()
 flags.auraPrompts = true
 end})
 -- connections
