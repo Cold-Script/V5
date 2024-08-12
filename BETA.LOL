@@ -627,6 +627,7 @@ function roomAdded(newRoom)
             end
             if table.find(auraPrompts, v.Name) and flags.auraPrompts then
                 task.spawn(function()
+                    wait(1.5)
                     repeat
                         if v:IsA'ProximityPrompt' then
                             local interaction = 'Interactions'..player.Name
@@ -659,7 +660,7 @@ function roomAdded(newRoom)
                             task.wait()
                             v:PivotTo(v:GetPivot() * CFrame.new(0, -2, 1) * CFrame.Angles(0, math.rad(10), 0))
                         until v.Parent == nil
-                        notify('figure death :(((')
+                        notify('[ YOU HUB ] : Library Ez 🤑🤑🤑')
                     end)
                 end
 
@@ -719,7 +720,7 @@ local exitKeys = {
 }
 
 game:GetService('ProximityPromptService').PromptTriggered:Connect(function(prompt)
-    if prompt.Parent.Name == 'Wardrobe' or prompt.Parent.Name == 'Toolshed' then
+    if prompt.Parent.Name == 'Wardrobe' or prompt.Parent.Name == 'Toolshed' or prompt.Parent.Name == 'RetroWardrobe' or prompt.Parent.Name == 'Backdoor_Wardrobe' then
         local ogTransparency = {}
         for i, v in pairs(prompt.Parent:GetDescendants()) do
             pcall(function()
@@ -765,7 +766,9 @@ group.prompts:AddSlider('cv15', {
         reach = v
     end
 })
-
+group.prompts:AddButton("",{Text="Aura Prompts",DoubleClick=true,Func=function()
+flags.auraPrompts = true
+end})
 -- connections
 local frame = {
     Counter = 0,
@@ -825,9 +828,9 @@ runService.RenderStepped:Connect(function(delta)
     task.spawn(function()
         if flags.speed then -- speed
             if speedMethod == 'Walkspeed' then
-                character.Humanoid.WalkSpeed = values.speedV
-            elseif speedMethod == 'Boost' then
                 character.Humanoid:SetAttribute('SpeedBoostBehind', values.speedV)
+            elseif speedMethod == 'Boost' then
+                character.Humanoid.WalkSpeed = values.speedV
             elseif speedMethod == 'CFrameWalk' then
                 character:TranslateBy(character.Humanoid.MoveDirection * (values.speedV / 1.23) / 100)
             end
