@@ -321,7 +321,7 @@ local group = {
     left2 = general:AddRightGroupbox'Misc',
     right2 = exploits:AddLeftGroupbox'Disabled',
     left3 = exploits:AddLeftGroupbox'Minigames',
-    prompts = exploits:AddLeftGroupbox'Prompts'
+    prompts = exploits:AddLeftGroupbox'Prompts',
     lol = exploits:AddLeftGroupbox'Auto-Prompts'
 }
 -- idk
