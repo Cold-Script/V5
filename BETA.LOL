@@ -310,7 +310,7 @@ function espAttempt(object, typea, text)
         end)
     end
 end
-notify('[ YOU HUB ] : You Enable Transparency Wardrobe [ Press Right ] ')
+notify('[ YOU HUB ] : You Enable Transparency Closet [ Press Right ] ')
 local general, exploits, visual = window:AddTab'General', window:AddTab'Exploits', window:AddTab'Visuals'
 local group = {
     left = general:AddLeftGroupbox'Speed',
