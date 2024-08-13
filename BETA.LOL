@@ -47,7 +47,7 @@ local LiveCaption = loadstring(game:HttpGet('https://raw.githubusercontent.com/C
 local Options = getgenv().Options
 
 local window = lib:CreateWindow({
-    Title = 'YOU HUB v5 | DOORS 👁️ [BETA] | ' .. player.Name,
+    Title = 'YOU HUB v5 | DOORS 👁️ [BETA] | THANKS : [ ' .. player.Name .. ' ]',
     Center = true,
     AutoShow = true,
     TabPadding = 8,
@@ -87,6 +87,17 @@ local AntiEntity = {
     Eyes = false,
     Obstruction = false
 }
+function checkDistance(part, extra)
+	if not extra then extra = 15 end
+	if not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or not part then
+		return false
+	end
+	local distanceToPart = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - part.Position).magnitude
+	if distanceToPart <= extra then
+		return true
+	end
+	return false
+end
 local v16={espdoors=false,espkeys=false,espitems=false,espbooks=false,esprush=false,espchest=false,esplocker=false,esphumans=false,espgold=false,goldespvalue=1061 -(810 + 251) ,hintrush=false,hintrushhee=false,light=false,instapp=false,noseek=false,nogates=false,nopuzzle=false,noa90=false,noskeledoors=false,noseekarmsfire=false,noscreech=false,nodupe=false,getcode=false,getcodet=false,roomsnolock=false,draweraura=false,autorooms=false,itemsaura=false,autopulllever=false,bookcollecter=false,breakercollecter=false};local v17={table.unpack(v16)};local v18={doors={},keys={},items={},books={},entity={},chests={},lockers={},people={},gold={}};
 local v22;v22=hookmetamethod(game,"__namecall",function(v75,...)local v76=0 + 0 ;local v77;local v78;while true do if (v76==(0 + 0)) then v77={...};v78=getnamecallmethod();v76=534 -(43 + 490) ;end if (v76==(734 -(711 + 22))) then if ((tostring(v75)=="Screech") and (v78=="FireServer") and getgenv().avoidsc) then local v437=0;while true do if (v437==(0 -0)) then v77[860 -(240 + 619) ]=true;return v22(v75,unpack(v77));end end end if ((tostring(v75)=="ClutchHeartbeat") and (v78=="FireServer") and getgenv().winhb) then v77[2]=true;return v22(v75,unpack(v77));end v76=1 + 1 ;end if (v76==(2 -0)) then return v22(v75,...);end end end);workspace.ChildAdded:Connect(function(v79)task.wait();if ((v79.Name=="RushMoving") or (v79.Name=="AmbushMoving")) then while workspace:FindFirstChild(v79.Name) and getgenv().hxde  do task.wait();part=v79:WaitForChild("RushNew");game.Players.LocalPlayer.Character.Collision.CFrame=CFrame.new(part.Position + Vector3.new(0 + 0 ,1819 -(1344 + 400) ,0) );end end end);
 
@@ -311,6 +322,7 @@ local group = {
     right2 = exploits:AddLeftGroupbox'Disabled',
     left3 = exploits:AddLeftGroupbox'Minigames',
     prompts = exploits:AddLeftGroupbox'Prompts'
+    lol = exploits:AddLeftGroupbox'Auto-Prompts'
 }
 -- idk
 group.entity:AddToggle('Screech', {
@@ -725,7 +737,7 @@ local exitKeys = {
 }
 
 game:GetService('ProximityPromptService').PromptTriggered:Connect(function(prompt)
-    if prompt.Parent.Name == 'Wardrobe' or prompt.Parent.Name == 'Toolshed' or prompt.Parent.Name == 'RetroWardrobe' or prompt.Parent.Name == 'Backdoor_Wardrobe' then
+    if prompt.Parent.Name == 'Wardrobe' or prompt.Parent.Name == 'Toolshed' or prompt.Parent.Name == 'RetroWardrobe' or prompt.Parent.Name == 'Backdoor_Wardrobe' or prompt.Parent.Name == 'Rooms_Locker' then
         local ogTransparency = {}
         for i, v in pairs(prompt.Parent:GetDescendants()) do
             pcall(function()
@@ -783,7 +795,122 @@ group.prompts:AddSlider('cv15', {
         reach = v
     end
 })
-
+group.lol:AddToggle("lol",{
+	Text = "↓ Auto Prompts ↓ : ",
+	Default = false,
+	Tooltip = "Auto Interact",
+	Callback = function(Value)
+		AutoInteract = Value
+	end
+})
+group.lol:AddButton({Text="Prompts Doors",Default=false,Func=function()
+for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
+				if v.Name == "Door" and v:IsA("Model") then
+					spawn(function()
+						while task.wait() do
+							if checkDistance(v:FindFirstChild("Hidden")) and AutoInteract then
+								fireproximityprompt(v.ActivateEventPrompt)
+							end
+						end
+					end)
+				end
+			end
+			workspace.CurrentRooms.ChildAdded:Connect(function(child)
+				task.wait(1)
+				for _, v in pairs(child:GetDescendants()) do
+					if v.Name == "Door" and v:IsA("Model") then
+						spawn(function()
+							while task.wait() do
+								if checkDistance(v:FindFirstChild("Hidden")) and AutoInteract then
+									fireproximityprompt(v.ActivateEventPrompt)
+								end
+							end
+						end)
+					end
+				end
+			end)
+			end})
+group.lol:AddButton({Text="Prompts KeyObtain",Default=false,Func=function()
+for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
+				if v.Name == "KeyObtain" and v:IsA("Model") then
+					spawn(function()
+						while task.wait() do
+							if checkDistance(v:FindFirstChildWhichIsA("BasePart")) and AutoInteract then
+								fireproximityprompt(v.ModulePrompt)
+							end
+						end
+					end)
+				end
+			end
+			workspace.CurrentRooms.ChildAdded:Connect(function(child)
+				task.wait(1)
+				for _, v in pairs(child:GetDescendants()) do
+					if v.Name == "KeyObtain" and v:IsA("Model") then
+						spawn(function()
+							while task.wait() do
+								if checkDistance(v:FindFirstChildWhichIsA("BasePart")) and AutoInteract then
+									fireproximityprompt(v.ModulePrompt)
+								end
+							end
+						end)
+					end
+				end
+			end)
+			end})
+group.lol:AddButton({Text="Prompts Books",Default=false,Func=function()
+for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
+				if v.Name == "LiveHintBook" and v:IsA("Model") then
+					spawn(function()
+						while task.wait() do
+							if checkDistance(v:FindFirstChildWhichIsA("BasePart")) and AutoInteract then
+								fireproximityprompt(v.ModulePrompt)
+							end
+						end
+					end)
+				end
+			end
+			workspace.CurrentRooms.ChildAdded:Connect(function(child)
+				task.wait(1)
+				for _, v in pairs(child:GetDescendants()) do
+					if v.Name == "LiveHintBook" and v:IsA("Model") then
+						spawn(function()
+							while task.wait() do
+								if checkDistance(v:FindFirstChildWhichIsA("BasePart")) and AutoInteract then
+									fireproximityprompt(v.ModulePrompt)
+								end
+							end
+						end)
+					end
+				end
+			end)
+			end})
+group.lol:AddButton({Text="Prompts Breaker [ Fuse ]",Default=false,Func=function()
+for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
+				if v.Name == "LiveBreakerPolePickup" and v:IsA("Model") then
+					spawn(function()
+						while task.wait() do
+							if checkDistance(v:FindFirstChildWhichIsA("BasePart")) and AutoInteract then
+								fireproximityprompt(v.ModulePrompt)
+							end
+						end
+					end)
+				end
+			end
+			workspace.CurrentRooms.ChildAdded:Connect(function(child)
+				task.wait(1)
+				for _, v in pairs(child:GetDescendants()) do
+					if v.Name == "LiveBreakerPolePickup" and v:IsA("Model") then
+						spawn(function()
+							while task.wait() do
+								if checkDistance(v:FindFirstChildWhichIsA("BasePart")) and AutoInteract then
+									fireproximityprompt(v.ModulePrompt)
+								end
+							end
+						end)
+					end
+				end
+			end)
+			end})
 -- connections
 local frame = {
     Counter = 0,
@@ -800,7 +927,7 @@ local watermarkConnection = runService.RenderStepped:Connect(function(deltaTime)
         frame.Counter = 0
     end
 
-    local watermark = ('YOU HUB v5 | DOORS 👁️ [BETA] | %s fps'):format(fps)
+    local watermark = ('YOU HUB v5 | DOORS 👁️ [BETA] | %s FPS'):format(fps)
 
     lib:SetWatermark(watermark)
 end)
