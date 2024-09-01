@@ -47,7 +47,7 @@ local LiveCaption = loadstring(game:HttpGet('https://raw.githubusercontent.com/C
 local Options = getgenv().Options
 
 local window = lib:CreateWindow({
-    Title = 'YOU HUB v5 | DOORS 👁️ [BETA] | THANKS : [ ' .. player.Name .. ' ]',
+    Title = '[ FLOOR 2 : DOORS 👁️ ] YOU HUB v5.5',
     Center = true,
     AutoShow = true,
     TabPadding = 8,
@@ -547,7 +547,10 @@ group.right:AddSlider('cv5', {
     Rounding = 1,
     Compact = true,
     Callback = function(v)
-        values.fieldOfView = v
+_G.Fov = true
+        while _G.Fov do wait()
+          workspace.CurrentCamera.FieldOfView = v
+       end
     end
 })
 group.right:AddButton({Text="ON & OFF Third Person",Func=function()game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
@@ -797,12 +800,15 @@ group.prompts:AddSlider('cv15', {
     end
 })
 group.lol:AddToggle("lol",{
-	Text = "↓ Auto Prompts ↓ : ",
+	Text = "Auto Prompts",
 	Default = false,
 	Tooltip = "Auto Interact",
-	Callback = function(Value)
+	Callback = function(Value, Value2)
+_G.Prompts = Value2
+if _G.Prompts do wait()
 		AutoInteract = Value
-	end
+            end
+end
 })
 group.lol:AddButton({Text="Prompts Doors",Default=false,Func=function()
 for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
@@ -928,7 +934,7 @@ local watermarkConnection = runService.RenderStepped:Connect(function(deltaTime)
         frame.Counter = 0
     end
 
-    local watermark = ('YOU HUB v5 | DOORS 👁️ [BETA] | %s FPS'):format(fps)
+    local watermark = ('[ FLOOR 2 : DOORS 👁️ ] : YOU HUB v5 | %s FPS'):format(fps)
 
     lib:SetWatermark(watermark)
 end)
@@ -1058,14 +1064,6 @@ runService.RenderStepped:Connect(function(delta)
             end
         end
     end
-
-    task.spawn(function()
-        if flags.fov then
-            camera.FieldOfView = values.fieldOfView
-        else
-            camera.FieldOfView = 70
-        end
-    end)
 
     pcall(function()
         if AntiEntity.Screech then
